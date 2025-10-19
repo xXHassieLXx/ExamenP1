@@ -271,3 +271,4 @@ C:\Users\hassi\RiderProjects\NatureAPI\NatureAPI.Models\obj\Debug\net9.0\refint\
 C:\Users\hassi\RiderProjects\NatureAPI\NatureAPI.Models\obj\Debug\net9.0\NatureAPI.Models.pdb
 C:\Users\hassi\RiderProjects\NatureAPI\NatureAPI.Models\obj\Debug\net9.0\NatureAPI.Models.genruntimeconfig.cache
 C:\Users\hassi\RiderProjects\NatureAPI\NatureAPI.Models\obj\Debug\net9.0\ref\NatureAPI.Models.dll
+C:\Users\hassi\RiderProjects\NatureAPI\NatureAPI.Models\obj\Debug\net9.0\NatureAPI.Models.sourcelink.json

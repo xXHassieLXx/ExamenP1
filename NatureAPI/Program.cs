@@ -18,6 +18,7 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+app.UseCors("AllowAll"); 
 
 app.UseSwagger();
 app.UseSwaggerUI();

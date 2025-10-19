@@ -47,6 +47,9 @@ namespace NatureAPI.Models.Controllers
         }
         
         
+        
+        
+        
         // easy, Moderate
         // nature
         [HttpGet]
@@ -88,35 +91,100 @@ namespace NatureAPI.Models.Controllers
 
         
         
-        [HttpGet("{id}")]
-        public async Task<ActionResult<PlaceRDTO>> GetPlaceById(int id)
-        {
-            var place = await _context.Place
-                .Where(p => p.Id == id)
-                .Select(p => new PlaceRDTO
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Description = p.Description,
-                    Category = p.Category,
-                    Latitude = p.Latitude,
-                    Longitude = p.Longitude,
-                    ElevationMeters = p.ElevationMeters,
-                    Accessible = p.Accessible,
-                    EntryFee = p.EntryFee,
-                    OpeningHours = p.OpeningHours,
-                    CreatedAt = p.CreatedAt
-                })
-                .FirstOrDefaultAsync();
-
-            if (place == null)
-                return NotFound();
-
-            return Ok(place);
-        }
         
         
+      [HttpGet("all")] 
+   public async Task<IActionResult> GetAllPlaces() 
+   { 
+       var place = await _context.Place.ToListAsync(); 
+       return Ok(place); 
+   } 
+ 
+   // GET: api/Trail/all 
+   [HttpGet("allTrails")] 
+   public async Task<IActionResult> GetAllTrails() 
+   { 
+       var trails = await _context.Trail 
+           .Include(t => t.Place) 
+           .ToListAsync(); 
+ 
+       var trailDTOs = trails.Select(t => new TrailRDTO 
+       { 
+           Id = t.Id, 
+           Name = t.Name, 
+           DistanceKm = t.DistanceKm, 
+           EstimatedTimeMinutes = t.EstimatedTimeMinutes, 
+           Difficulty = t.Difficulty, 
+           Path = t.Path, 
+           IsLoop = t.IsLoop, 
+           Place = new PlaceDTO 
+           { 
+               Id = t.Place.Id, 
+               Name = t.Place.Name, 
+               Accessible = t.Place.Accessible 
+           } 
+       }); 
+ 
+       return Ok(trailDTOs); 
+   } 
+ 
+ 
+ 
+ 
+   [HttpGet("{id}")] 
+   public async Task<ActionResult<PlaceRDTO>> GetPlaceById(int id) 
+   { 
+       var place = await _context.Place 
+           .Where(p => p.Id == id) 
+           .Select(p => new PlaceRDTO 
+           { 
+               Id = p.Id, 
+               Name = p.Name, 
+               Description = p.Description, 
+               Category = p.Category, 
+               Latitude = p.Latitude, 
+               Longitude = p.Longitude, 
+               ElevationMeters = p.ElevationMeters, 
+               Accessible = p.Accessible, 
+               EntryFee = p.EntryFee, 
+               OpeningHours = p.OpeningHours, 
+               CreatedAt = p.CreatedAt, 
+ 
+               Photos = p.Photos.Select(ph => new PhotoDTO 
+               { 
+                   Id = ph.Id, 
+                   Url = ph.Url 
+               }).ToList(), 
+ 
+               Amenities = p.PlaceAmenities 
+                   .Select(pa => new AmenityDTO 
+                   { 
+                       Id = pa.Amenity.Id, 
+                       Name = pa.Amenity.Name 
+                   }).ToList(), 
+ 
+               Trails = p.Trails 
+                   .Select(t => new TrailRDTO 
+                   { 
+                       Id = t.Id, 
+                       Name = t.Name, 
+                       DistanceKm = t.DistanceKm, 
+                       Difficulty = t.Difficulty, 
+                       EstimatedTimeMinutes = t.EstimatedTimeMinutes, 
+                       IsLoop = t.IsLoop 
+                   }).ToList() 
+           }) 
+           .FirstOrDefaultAsync(); 
+ 
+       if (place == null) 
+           return NotFound(); 
+ 
+       return Ok(place); 
+   } 
+}   
         
         
     }
-}
+    
+    
+    
