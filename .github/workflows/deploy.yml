@@ -16,15 +16,15 @@ jobs:
         run: docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
 
       - name: Build Docker Image
-        run: docker build -t hassielam/611-nature-api:${{ github.sha }} .
+        run: docker build -t hassielam/611-nature-apiapi:${{ github.sha }} .
 
       - name: Tag Latest
-        run: docker tag hassielam/611-nature-api:${{ github.sha }} hassielam/611-nature-api:latest
+        run: docker tag hassielam/611-nature-apiapi:${{ github.sha }} hassielam/611-nature-apiapi:latest
 
       - name: Push Docker Image
         run: |
-          docker push hassielam/611-nature-api:${{ github.sha }}
-          docker push hassielam/611-nature-api:latest
+          docker push hassielam/611-nature-apiapi:${{ github.sha }}
+          docker push hassielam/611-nature-apiapi:latest
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
@@ -36,6 +36,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            docker pull hassielam/611-nature-api:latest
+            docker pull hassielam/611-nature-apiapi:latest
             cd containers
             docker compose up -d
