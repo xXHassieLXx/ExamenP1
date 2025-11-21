@@ -1,15 +1,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build-env
 WORKDIR /App
 COPY . ./
-RUN ls
 RUN dotnet restore
-RUN ls /App/NatureAPI
-RUN dotnet publish /App/NatureAPI/NatureAPI.csproj -c Release -o /App/build
+RUN dotnet publish /App/NatureAPI/NatureAPI.csproj -c Release -o /App/build --no-self-contained -p:GenerateDocumentationFile=false
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
-RUN apt-get update -qq --fix-missing && apt-get -y install libgdiplus libc6-dev
-RUN apt-get update --fix-missing && apt-get install -y wget fontconfig
-
+RUN apt-get update && apt-get -y install libgdiplus libc6-dev wget fontconfig
 RUN mkdir -p /usr/share/fonts/truetype/poppins && \
     wget -O /usr/share/fonts/truetype/poppins/Poppins-Regular.ttf https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Regular.ttf && \
     wget -O /usr/share/fonts/truetype/poppins/Poppins-Bold.ttf https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Bold.ttf && \
