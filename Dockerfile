@@ -7,8 +7,8 @@ RUN ls
 # Restore as distinct layers
 RUN dotnet restore
 # Build and publish a release
-RUN ls /App/StoreApi
-RUN dotnet publish /App/StoreApi/StoreApi.csproj -c Release -o /App/build
+RUN ls /App/NatureAPI
+RUN dotnet publish /App/NatureAPI/NatureAPI.csproj -c Release -o /App/build
 
 
 # Build runtime image
@@ -22,8 +22,8 @@ RUN mkdir -p /usr/share/fonts/truetype/poppins && \
     fc-cache -f -v
 WORKDIR /App
 COPY --from=build-env /App/build .
-COPY ./StoreApi/Templates ./Templates
+COPY ./NatureAPI/Templates ./Templates
 RUN chmod 755 /App/Rotativa/Linux/wkhtmltopdf
-ENTRYPOINT ["dotnet", "StoreApi.dll"]
+ENTRYPOINT ["dotnet", "NatureAPI.dll"]
 
  
