@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NatureAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e26cb47bb3b3a27b795ae51f309ec9b8ddeeb4e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db840499fdfc46ab5f7b0e4aac48043c566a53e0")]
 [assembly: System.Reflection.AssemblyProductAttribute("NatureAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NatureAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
