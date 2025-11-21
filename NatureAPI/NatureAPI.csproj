@@ -11,8 +11,8 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.8" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
@@ -21,13 +21,25 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\NatureAPI.Models\NatureAPI.Models.csproj" />
+        <ProjectReference Include="..\NatureAPI.Models\NatureAPI.Models.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Remove="appsettings.Development.json" />
+        <None Remove="appsettings.Development.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Remove="..\NatureAPI.Models\appsettings.json" />
+        <Content Remove="..\NatureAPI.Models\appsettings.Development.json" />
+        <None Remove="..\NatureAPI.Models\appsettings.json" />
+        <None Remove="..\NatureAPI.Models\appsettings.Development.json" />
     </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build-env
 WORKDIR /App
 COPY . ./
 RUN dotnet restore
-RUN dotnet publish /App/NatureAPI/NatureAPI.csproj -c Release -o /App/build --no-self-contained -p:GenerateDocumentationFile=false
+RUN dotnet publish /App/NatureAPI/NatureAPI.csproj -c Release -o /App/build --no-self-contained -p:PublishReadyToRun=false -p:DebugType=none -p:DebugSymbols=false
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 RUN apt-get update && apt-get -y install libgdiplus libc6-dev wget fontconfig
