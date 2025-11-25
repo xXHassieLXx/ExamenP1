@@ -1,5 +1,4 @@
 C:\Users\hassi\RiderProjects\NatureAPI\NatureAPI.Models\bin\Debug\net9.0\appsettings.Development.json
-C:\Users\hassi\RiderProjects\NatureAPI\NatureAPI.Models\bin\Debug\net9.0\appsettings.json
 C:\Users\hassi\RiderProjects\NatureAPI\NatureAPI.Models\bin\Debug\net9.0\NatureAPI.Models.staticwebassets.endpoints.json
 C:\Users\hassi\RiderProjects\NatureAPI\NatureAPI.Models\bin\Debug\net9.0\NatureAPI.Models.exe
 C:\Users\hassi\RiderProjects\NatureAPI\NatureAPI.Models\bin\Debug\net9.0\NatureAPI.Models.deps.json
