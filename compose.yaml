@@ -3,13 +3,52 @@
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: SQL_Server
     ports:
-      - 1434:1433
+      - 1433:1433
     environment:
       - MSSQL_SA_PASSWORD=HaSsi3l.02
       - ACCEPT_EULA=Y
       - MSSQL_PID=Developer
-    
     volumes:
       - sql_server_data:/var/opt/mssql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "HaSsi3l.02", "-Q", "SELECT 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  store-api:
+    image: hassielam/611-nature-apiapi:latest
+    container_name: StoreAPI
+    ports:
+      - 8080:8080
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=NatureDB;User Id=sa;Password=HaSsi3l.02;Encrypt=false;TrustServerCertificate=true;
+      - ASPNETCORE_ENVIRONMENT=Production
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  store-app:
+    image: hassielam/611-nature-api:latest
+    container_name: StoreApp
+    ports:
+      - 80:80
+    environment:
+      - API_URL=http://store-api:8080/api
+    depends_on:
+      - store-api
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
+
 volumes:
   sql_server_data:
