@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using NatureAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("SqlServer");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 // Add services to the container.
 
 builder.Services.AddControllers();
